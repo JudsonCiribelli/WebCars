@@ -1,8 +1,8 @@
 const LoginPage = () => {
   return (
-    <div>
+    <div className="flex w-full max-h-screen">
       <div>
-        <h1>Login</h1>
+        <h1 className="text-red-200">Login</h1>
       </div>
     </div>
   );

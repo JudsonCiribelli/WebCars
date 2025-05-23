@@ -8,7 +8,7 @@ const HeaderComponent = () => {
           Web<span className="text-2xl font-bold text-white">Carros</span>
         </h1>
       </div>
-      <div className="flex border p-2 rounded-full cursor-pointer">
+      <div className="flex border-2 p-2 rounded-full cursor-pointer">
         <IoIosLogOut size={25} />
       </div>
     </header>

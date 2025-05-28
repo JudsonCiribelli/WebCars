@@ -1,10 +1,36 @@
-import type { FormEvent } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { type FormEvent, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { AppContext } from "../../context/AppContext";
+import { auth } from "../../services/firebaseConection";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setLogin } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const handleSubmitUser = (e: FormEvent) => {
     e.preventDefault();
-    console.log("Usuario logado");
+
+    if (email === "" && password === "") {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        console.log("Usuario logado com sucesso");
+        setLogin();
+        navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        alert("Ocorreu algum error efetuar login");
+        return error;
+      });
   };
+
   return (
     <div className="w-full flex flex-col h-screen justify-center items-center">
       {/* Logo */}
@@ -21,11 +47,15 @@ const LoginPage = () => {
         >
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-xl border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
             placeholder="Digite seu email..."
           />
           <input
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className=" w-xl border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
             placeholder="Digite sua senha..."
           />

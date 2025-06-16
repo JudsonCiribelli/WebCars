@@ -1,8 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import InputComponent from "../../components/Input-Component/inputComponent";
+import { auth } from "../../services/firebaseConection";
 
 const schema = z.object({
   email: z
@@ -15,6 +18,8 @@ const schema = z.object({
 export type FormData = z.infer<typeof schema>;
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -25,7 +30,13 @@ const LoginPage = () => {
   });
 
   const handleSubmitUser = (data: FormData) => {
-    console.log(data);
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        navigate("/dasboard", { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

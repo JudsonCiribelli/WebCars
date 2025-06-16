@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -28,6 +29,13 @@ const LoginPage = () => {
     resolver: zodResolver(schema),
     mode: "onChange",
   });
+
+  useEffect(() => {
+    const handleSignOutUser = async () => {
+      await signOut(auth);
+    };
+    handleSignOutUser();
+  }, []);
 
   const handleSubmitUser = (data: FormData) => {
     signInWithEmailAndPassword(auth, data.email, data.password)

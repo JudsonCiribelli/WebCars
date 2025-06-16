@@ -1,3 +1,5 @@
+import InputComponent from "../../components/Input-Component/inputComponent";
+
 const RegisterPage = () => {
   return (
     <div className="w-full flex flex-col h-screen justify-center items-center text-center">
@@ -10,20 +12,20 @@ const RegisterPage = () => {
       {/* Formularios */}
       <div>
         <form className="w-full max-w-2xl flex flex-col bg-white p-8 rounded-2xl">
-          <input
+          <InputComponent
             type="text"
-            className="w-xl border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
             placeholder="Digite seu nome completo..."
+            name="name"
           />
-          <input
+          <InputComponent
             type="email"
-            className=" w-xl border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
             placeholder="Digite seu email..."
+            name="email"
           />
-          <input
+          <InputComponent
             type="password"
-            className=" w-xl border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
             placeholder="*********"
+            name="password"
           />
           <button
             type="submit"

@@ -4,7 +4,7 @@ import { AppContext } from "./AppContext";
 
 interface AppContextProdiverProps {
   children: React.ReactNode;
-  setLogin: () => void;
+  setLogin: () => false;
 }
 export const AppContextProvider = ({ children }: AppContextProdiverProps) => {
   const [isLogin, setIsLogin] = useState(false);

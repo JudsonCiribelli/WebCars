@@ -32,7 +32,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full flex flex-col h-screen justify-center items-center">
+    <div className="w-full flex flex-col h-screen justify-center items-center text-center">
       {/* Logo */}
       <div className="flex items-center justify-center w-[350px] h-12  bg-red-500 p-12 rounded-xl m-10 ">
         <h1 className="text-6xl flex font-bold">
@@ -66,6 +66,12 @@ const LoginPage = () => {
             Acessar
           </button>
         </form>
+        <p className="my-2 text-lg font-medium">
+          Ainda não possui conta ?{" "}
+          <a href="/register" className="text-lg text-red-500 font-bold">
+            Cadastre-se
+          </a>
+        </p>
       </div>
     </div>
   );

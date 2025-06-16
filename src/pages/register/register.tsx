@@ -1,8 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import z from "zod";
 
 import InputComponent from "../../components/Input-Component/inputComponent";
+import { auth } from "../../services/firebaseConection";
 
 const schema = z.object({
   email: z
@@ -15,8 +18,11 @@ const schema = z.object({
     .nonempty("Este campo é obrigatório"),
   name: z.string().nonempty("Preencha todos os campos!"),
 });
+
 type FormData = z.infer<typeof schema>;
+
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,7 +33,18 @@ const RegisterPage = () => {
   });
 
   const handleRegisterUser = (data: FormData) => {
-    console.log(data);
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then(async (user) => {
+        await updateProfile(user.user, {
+          displayName: data.name,
+        });
+
+        console.log("Usuario cadastrado com sucesso");
+        navigate("/dasboard", { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

@@ -1,15 +1,35 @@
-// import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import InputComponent from "../../components/Input-Component/inputComponent";
-// import { AppContext } from "../../context/AppContext";
-// import { auth } from "../../services/firebaseConection";
+
+const schema = z.object({
+  email: z
+    .string()
+    .email("Insira um email válido!")
+    .nonempty("Este campo é obrigatório"),
+  password: z.string().nonempty("Este campo é obrigatório"),
+});
+
+export type FormData = z.infer<typeof schema>;
 
 const LoginPage = () => {
-  // const { setLogin } = useContext(AppContext);
-  // const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+  });
+
+  const handleSubmitUser = (data: FormData) => {
+    console.log(data);
+  };
 
   return (
-    <div className="w-full flex flex-col h-screen justify-center items-center text-center">
+    <div className="w-full flex flex-col h-screen justify-center items-center ">
       {/* Logo */}
       <div className="flex items-center justify-center w-[350px] h-12  bg-red-500 p-12 rounded-xl m-10 ">
         <h1 className="text-6xl flex font-bold">
@@ -18,13 +38,20 @@ const LoginPage = () => {
       </div>
       {/* Formularios */}
       <div>
-        <form className="w-full max-w-2xl flex flex-col bg-white p-10 rounded-2xl">
+        <form
+          className="w-full max-w-2xl flex flex-col bg-white p-10 rounded-2xl"
+          onSubmit={handleSubmit(handleSubmitUser)}
+        >
           <InputComponent
+            register={register}
+            error={errors.email?.message}
             type="email"
             placeholder="Digite seu email..."
             name="email"
           />
           <InputComponent
+            register={register}
+            error={errors.password?.message}
             type="password"
             name="password"
             placeholder="Digite sua senha..."
@@ -37,7 +64,7 @@ const LoginPage = () => {
             Acessar
           </button>
         </form>
-        <p className="my-2 text-lg font-medium">
+        <p className="my-2 text-lg font-medium text-center">
           Ainda não possui conta ?{" "}
           <a href="/register" className="text-lg text-red-500 font-bold">
             Cadastre-se

@@ -7,7 +7,7 @@ import { AppContext } from "./AppContext";
 interface AppContextProdiverProps {
   children: ReactNode;
 }
-interface UserContextProps {
+export interface UserContextProps {
   name: string | null;
   uid: string;
   email: string | null;
@@ -35,8 +35,18 @@ export const AppContextProvider = ({ children }: AppContextProdiverProps) => {
       unSub();
     };
   }, []);
+
+  const handleInfoUser = ({ name, email, uid }: UserContextProps) => {
+    setUser({
+      name,
+      uid,
+      email,
+    });
+  };
   return (
-    <AppContext.Provider value={{ signed: !!user, loadingAuth }}>
+    <AppContext.Provider
+      value={{ signed: !!user, loadingAuth, handleInfoUser, user }}
+    >
       {children}
     </AppContext.Provider>
   );

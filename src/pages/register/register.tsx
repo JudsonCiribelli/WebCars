@@ -4,12 +4,13 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import z from "zod";
 
 import InputComponent from "../../components/Input-Component/inputComponent";
+import { AppContext } from "../../context/AppContext";
 import { auth } from "../../services/firebaseConection";
 
 const schema = z.object({
@@ -27,6 +28,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const RegisterPage = () => {
+  const { handleInfoUser } = useContext(AppContext);
   const navigate = useNavigate();
   const {
     register,
@@ -50,7 +52,11 @@ const RegisterPage = () => {
         await updateProfile(user.user, {
           displayName: data.name,
         });
-
+        handleInfoUser({
+          name: data.name,
+          email: data.email,
+          uid: user.user.uid,
+        });
         console.log("Usuario cadastrado com sucesso");
         navigate("/dasboard", { replace: true });
       })

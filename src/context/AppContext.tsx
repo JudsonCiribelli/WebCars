@@ -1,10 +1,7 @@
 import { createContext } from "react";
 
-interface AppContextProps {
-  isLogin: boolean;
-  setLogin: () => void;
-}
-export const AppContext = createContext<AppContextProps>({
-  isLogin: false,
-  setLogin: () => {},
-});
+type AppContextProps = {
+  signed: boolean;
+  loadingAuth: boolean;
+};
+export const AppContext = createContext({} as AppContextProps);

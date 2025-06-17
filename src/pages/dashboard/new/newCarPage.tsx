@@ -1,5 +1,11 @@
+import PainelHeader from "../components/Painel-Header/painelHeader";
+
 const NewCarPage = () => {
-  return <h1>Adicionar novo carro</h1>;
+  return (
+    <div className="m-10">
+      <PainelHeader />
+    </div>
+  );
 };
 
 export default NewCarPage;

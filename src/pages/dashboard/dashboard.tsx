@@ -1,5 +1,11 @@
+import PainelHeader from "./components/Painel-Header/painelHeader";
+
 const DashboardPage = () => {
-  return <h1>Dasboard Page</h1>;
+  return (
+    <div className="m-10">
+      <PainelHeader />
+    </div>
+  );
 };
 
 export default DashboardPage;

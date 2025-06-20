@@ -24,7 +24,7 @@ const InputComponent = ({
         {...register(name, rules)}
         id={name}
         placeholder={placeholder}
-        className="w-xl border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
+        className="w-full border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
       />
       {error && <p className="text-red-600 mb-2 font-semibold">{error}</p>}
     </div>

@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { addDoc, collection } from "firebase/firestore";
 import {
   deleteObject,
   getDownloadURL,
@@ -14,7 +15,7 @@ import z from "zod";
 
 import InputComponent from "../../../components/Input-Component/inputComponent";
 import { AppContext } from "../../../context/AppContext";
-import { storage } from "../../../services/firebaseConection";
+import { db, storage } from "../../../services/firebaseConection";
 import PainelHeader from "../components/Painel-Header/painelHeader";
 
 const schema = z.object({
@@ -55,6 +56,41 @@ const NewCarPage = () => {
   });
 
   const handleSubmitCars = (data: FormData) => {
+    if (carImages.length === 0) {
+      alert("Adicione alguma imagem");
+      return;
+    }
+
+    const carListImages = carImages.map((car) => {
+      return {
+        uid: car.uid,
+        name: car.name,
+        url: car.url,
+      };
+    });
+
+    addDoc(collection(db, "cars"), {
+      name: data.name,
+      model: data.model,
+      year: data.year,
+      km: data.km,
+      price: data.price,
+      description: data.description,
+      created: new Date(),
+      owner: user?.name,
+      uid: user?.uid,
+      images: carListImages,
+    })
+      .then(() => {
+        reset();
+        setCarImages([]);
+        console.log("Cadastrado com sucesso");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error ao cadastrar no banco");
+      });
+
     console.log(data);
   };
 
@@ -107,7 +143,7 @@ const NewCarPage = () => {
   };
 
   return (
-    <div className="m-8">
+    <div className="m-10">
       <PainelHeader />
 
       <div className="flex flex-col w-full bg-white p-3 rounded-lg sm:flex-row items-center gap-2">

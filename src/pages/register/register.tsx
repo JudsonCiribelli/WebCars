@@ -74,7 +74,7 @@ const RegisterPage = () => {
         </h1>
       </div>
       {/* Formularios */}
-      <div>
+      <div className="flex flex-col items-center justify-center w-full">
         <form
           className="w-full max-w-2xl flex flex-col bg-white p-8 rounded-2xl"
           onSubmit={handleSubmit(handleRegisterUser)}

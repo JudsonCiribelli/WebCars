@@ -75,6 +75,7 @@ const NewCarPage = () => {
       year: data.year,
       km: data.km,
       price: data.price,
+      city: data.city,
       description: data.description,
       created: new Date(),
       owner: user?.name,

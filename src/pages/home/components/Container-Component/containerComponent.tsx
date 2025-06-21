@@ -1,8 +1,8 @@
 interface ContainerComponentProps {
   imgUrl: string;
   name: string;
-  year: number;
-  value: string;
+  year: number | string;
+  value: string | number;
   city: string;
   km: string;
 }

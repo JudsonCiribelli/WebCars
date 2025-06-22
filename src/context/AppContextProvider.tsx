@@ -12,6 +12,7 @@ export interface UserContextProps {
   uid: string;
   email: string | null;
 }
+
 export const AppContextProvider = ({ children }: AppContextProdiverProps) => {
   const [user, setUser] = useState<UserContextProps | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
@@ -36,6 +37,8 @@ export const AppContextProvider = ({ children }: AppContextProdiverProps) => {
     };
   }, []);
 
+  const handleLoadCars = () => {};
+
   const handleInfoUser = ({ name, email, uid }: UserContextProps) => {
     setUser({
       name,
@@ -45,7 +48,13 @@ export const AppContextProvider = ({ children }: AppContextProdiverProps) => {
   };
   return (
     <AppContext.Provider
-      value={{ signed: !!user, loadingAuth, handleInfoUser, user }}
+      value={{
+        signed: !!user,
+        loadingAuth,
+        handleInfoUser,
+        user,
+        handleLoadCars,
+      }}
     >
       {children}
     </AppContext.Provider>

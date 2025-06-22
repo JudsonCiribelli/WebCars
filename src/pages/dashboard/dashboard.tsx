@@ -1,4 +1,11 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +35,7 @@ const DashboardPage = () => {
   const [cars, setCars] = useState<CarsProps[]>([]);
   const { user } = useContext(AppContext);
   const navigate = useNavigate();
+
   useEffect(() => {
     const loadCars = () => {
       if (!user?.uid) {
@@ -58,7 +66,14 @@ const DashboardPage = () => {
     };
 
     loadCars();
-  }, []);
+  }, [user]);
+
+  const handleDeleteCar = async (id: string) => {
+    const docRef = doc(db, "cars", id);
+    await deleteDoc(docRef);
+    setCars(cars.filter((car) => car.id !== id));
+  };
+
   return (
     <div className="m-10">
       <PainelHeader />
@@ -67,7 +82,7 @@ const DashboardPage = () => {
         {cars.map((car) => (
           <div className="w-full bg-white rounded-lg relative" key={car.id}>
             <button
-              onClick={() => {}}
+              onClick={() => handleDeleteCar(car.id)}
               className="absolute bg-white w-14 h-14 rounded-full flex items-center justify-center left-2 drop-shadow-2xl"
             >
               <FiTrash2 size={28} color="#000" />

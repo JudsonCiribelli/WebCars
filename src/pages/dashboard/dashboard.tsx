@@ -6,12 +6,13 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 import { useContext, useEffect, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 import { AppContext } from "../../context/AppContext";
-import { db } from "../../services/firebaseConection";
+import { db, storage } from "../../services/firebaseConection";
 // import ContainerComponent from "../home/components/Container-Component/containerComponent";
 import PainelHeader from "./components/Painel-Header/painelHeader";
 interface CarsProps {
@@ -68,10 +69,22 @@ const DashboardPage = () => {
     loadCars();
   }, [user]);
 
-  const handleDeleteCar = async (id: string) => {
-    const docRef = doc(db, "cars", id);
+  const handleDeleteCar = async (car: CarsProps) => {
+    const itemCar = car;
+    const docRef = doc(db, "cars", itemCar.id);
     await deleteDoc(docRef);
-    setCars(cars.filter((car) => car.id !== id));
+
+    itemCar.images.map(async (image) => {
+      const imagePath = `/images/${image.uid}/${image.name}`;
+      const imageRef = ref(storage, imagePath);
+
+      try {
+        await deleteObject(imageRef);
+        setCars(cars.filter((car) => car.id !== itemCar.id));
+      } catch (error) {
+        console.log("Error ao deletar imagem: " + error);
+      }
+    });
   };
 
   return (
@@ -82,7 +95,7 @@ const DashboardPage = () => {
         {cars.map((car) => (
           <div className="w-full bg-white rounded-lg relative" key={car.id}>
             <button
-              onClick={() => handleDeleteCar(car.id)}
+              onClick={() => handleDeleteCar(car)}
               className="absolute bg-white w-14 h-14 rounded-full flex items-center justify-center left-2 drop-shadow-2xl"
             >
               <FiTrash2 size={28} color="#000" />

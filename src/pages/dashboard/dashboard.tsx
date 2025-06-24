@@ -9,7 +9,7 @@ import {
 import { deleteObject, ref } from "firebase/storage";
 import { useContext, useEffect, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AppContext } from "../../context/AppContext";
 import { db, storage } from "../../services/firebaseConection";
@@ -93,33 +93,35 @@ const DashboardPage = () => {
 
       <main className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 ">
         {cars.map((car) => (
-          <div className="w-full bg-white rounded-lg relative" key={car.id}>
-            <button
-              onClick={() => handleDeleteCar(car)}
-              className="absolute bg-white w-14 h-14 rounded-full flex items-center justify-center left-2 drop-shadow-2xl"
-            >
-              <FiTrash2 size={28} color="#000" />
-            </button>
+          <Link to={`/car/${car.id}`}>
+            <div className="w-full bg-white rounded-lg relative" key={car.id}>
+              <button
+                onClick={() => handleDeleteCar(car)}
+                className="absolute bg-white w-14 h-14 rounded-full flex items-center justify-center left-2 drop-shadow-2xl"
+              >
+                <FiTrash2 size={28} color="#000" />
+              </button>
 
-            <img
-              src={car.images[0].url}
-              className="w-full rounded-lg mb-2 max-w-70"
-            />
-            <p className="font-bold mt-1 px-2 mb-2">{car.name}</p>
+              <img
+                src={car.images[0].url}
+                className="w-full rounded-lg mb-2 max-w-70"
+              />
+              <p className="font-bold mt-1 px-2 mb-2">{car.name}</p>
 
-            <div className="flex flex-col px-2">
-              <span className="text-zinc-700">
-                {car.year}| {car.km}
-              </span>
-              <strong className="text-black font-bold mt-4">
-                R$:{car.price}
-              </strong>
+              <div className="flex flex-col px-2">
+                <span className="text-zinc-700">
+                  {car.year}| {car.km}
+                </span>
+                <strong className="text-black font-bold mt-4">
+                  R$:{car.price}
+                </strong>
+              </div>
+              <div className="w-full h-px bg-slate 200 my-2"></div>
+              <div className="px-2 pb-2">
+                <span className="text-black">{car.city}</span>
+              </div>
             </div>
-            <div className="w-full h-px bg-slate 200 my-2"></div>
-            <div className="px-2 pb-2">
-              <span className="text-black">{car.city}</span>
-            </div>
-          </div>
+          </Link>
         ))}
       </main>
     </div>

@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { db } from "../../services/firebaseConection";
@@ -31,6 +31,7 @@ const CarsPage = () => {
   const [car, setCar] = useState<CarProps>();
   const [sliderPreview, setSliderPreview] = useState<number>(2);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadCars = async () => {
@@ -40,6 +41,9 @@ const CarsPage = () => {
       const docRef = doc(db, "cars", id);
       getDoc(docRef)
         .then((snapshot) => {
+          if (!snapshot.data()) {
+            navigate("/");
+          }
           setCar({
             id: snapshot.id,
             name: snapshot.data()?.name,
@@ -64,7 +68,7 @@ const CarsPage = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 720) {
+      if (window.innerWidth < 720) {
         setSliderPreview(1);
       } else {
         setSliderPreview(2);
@@ -81,26 +85,26 @@ const CarsPage = () => {
 
   return (
     <div className="m-10">
-      <Swiper
-        slidesPerView={sliderPreview}
-        pagination={{ clickable: true }}
-        navigation
-      >
-        {car?.images.map((image) => (
-          <SwiperSlide>
-            <img
-              src={image.url}
-              className="w-full h-96 rounded-lg object-cover"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
+      {car && (
+        <Swiper
+          slidesPerView={sliderPreview}
+          pagination={{ clickable: true }}
+          navigation
+        >
+          {car?.images.map((image) => (
+            <SwiperSlide>
+              <img src={image.url} className="w-full h-96 object-cover " />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
       {car && (
         <main className="w-full bg-white rounded-lg p-6 my-4">
           <div className="flex flex-col sm:flex-row mb-4 items-center justify-between">
             <h1 className="font-bold text-3xl text-black">{car?.name}</h1>
-            <h1 className="font-bold text-3xl text-black">R$:{car?.price}</h1>
+            <h1 className="font-bold text-3xl text-black">
+              R$: {car?.price},00
+            </h1>
           </div>
           <p>{car?.model}</p>
           <div className="flex w-full gap-6 my-4">
@@ -125,7 +129,11 @@ const CarsPage = () => {
           <p className="mb-4">{car?.description}</p>
           <strong>Telefone / Whatsapp</strong>
           <p>{car?.whatsapp}</p>
-          <a className="bg-green-500 w-full text-white flex items-center justify-center my-6 gap-2 h-11 text-xl rounded-lg font-medium cursor-pointer">
+          <a
+            href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text='Olá vi esse ${car?.name} e fiquei interessado'`}
+            target="_blank"
+            className="bg-green-500 w-full text-white flex items-center justify-center my-6 gap-2 h-11 text-xl rounded-lg font-medium cursor-pointer"
+          >
             Conversar com Vendedor <FaWhatsapp size={26} color="#fff" />
           </a>
         </main>

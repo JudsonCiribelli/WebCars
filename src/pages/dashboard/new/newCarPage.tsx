@@ -278,7 +278,7 @@ const NewCarPage = () => {
           </div>
 
           <button
-            className="items-center w-full bg-zinc-900 text-white my-1 p-3 rounded-md font-medium"
+            className="items-center w-full bg-zinc-900 text-white my-1 p-3 rounded-md font-medium cursor-pointer"
             type="submit"
           >
             Cadastrar

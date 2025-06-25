@@ -104,7 +104,7 @@ const DashboardPage = () => {
 
               <img
                 src={car.images[0].url}
-                className="w-full rounded-lg mb-2 max-w-70"
+                className="w-full rounded-t-lg mb-2"
               />
               <p className="font-bold mt-1 px-2 mb-2">{car.name}</p>
 

@@ -2,9 +2,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { db } from "../../services/firebaseConection";
-
 interface CarProps {
   id: string;
   name: string;
@@ -29,6 +29,7 @@ interface ImageCarProps {
 
 const CarsPage = () => {
   const [car, setCar] = useState<CarProps>();
+  const [sliderPreview, setSliderPreview] = useState<number>(2);
   const { id } = useParams();
 
   useEffect(() => {
@@ -60,9 +61,40 @@ const CarsPage = () => {
     };
     loadCars();
   }, [id]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 720) {
+        setSliderPreview(1);
+      } else {
+        setSliderPreview(2);
+      }
+    };
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="m-10">
-      <h1>slider</h1>
+      <Swiper
+        slidesPerView={sliderPreview}
+        pagination={{ clickable: true }}
+        navigation
+      >
+        {car?.images.map((image) => (
+          <SwiperSlide>
+            <img
+              src={image.url}
+              className="w-full h-96 rounded-lg object-cover"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {car && (
         <main className="w-full bg-white rounded-lg p-6 my-4">

@@ -70,13 +70,14 @@ const NewCarPage = () => {
     });
 
     addDoc(collection(db, "cars"), {
-      name: data.name,
+      name: data.name.toUpperCase(),
       model: data.model,
       year: data.year,
       km: data.km,
       price: data.price,
       city: data.city,
       description: data.description,
+      whatsapp: data.whatsapp,
       created: new Date(),
       owner: user?.name,
       uid: user?.uid,

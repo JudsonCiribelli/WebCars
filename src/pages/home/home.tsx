@@ -62,8 +62,8 @@ const HomePage = () => {
 
     const q = query(
       collection(db, "cars"),
-      where("name", ">=", InputValue),
-      where("name", "<=", InputValue + "\uf8ff")
+      where("name", ">=", InputValue.toUpperCase()),
+      where("name", "<=", InputValue.toUpperCase() + "\uf8ff")
     );
 
     const querySnapshot = await getDocs(q);

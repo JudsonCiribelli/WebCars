@@ -17,7 +17,7 @@ const HeaderComponent = () => {
       <div className="bg-red-500 rounded-xl p-3 m-10">
         <Link to={"/"}>
           <h1 className="text-2xl font-bold">
-            Web<span className="text-2xl font-bold text-white">Carros</span>
+            Sport<span className="text-2xl font-bold text-white">Carros</span>
           </h1>
         </Link>
       </div>

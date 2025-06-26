@@ -70,7 +70,7 @@ const RegisterPage = () => {
       {/* Logo */}
       <div className="flex items-center justify-center w-[350px] h-12  bg-red-500 p-12 rounded-xl m-10 ">
         <h1 className="text-6xl flex font-bold">
-          Web <span className="text-white font-bold">Carros</span>
+          Sport <span className="text-white font-bold">Carros</span>
         </h1>
       </div>
       {/* Formularios */}

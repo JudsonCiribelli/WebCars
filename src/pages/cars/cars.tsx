@@ -130,7 +130,7 @@ const CarsPage = () => {
           <strong>Telefone / Whatsapp</strong>
           <p>{car?.whatsapp}</p>
           <a
-            href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text='Olá vi esse ${car?.name} e fiquei interessado'`}
+            href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text='Olá vi esse ${car?.name} no site WebCarros e fiquei interessado'`}
             target="_blank"
             className="bg-green-500 w-full text-white flex items-center justify-center my-6 gap-2 h-11 text-xl rounded-lg font-medium cursor-pointer"
           >

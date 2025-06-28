@@ -8,6 +8,7 @@ import {
 } from "firebase/storage";
 import { type ChangeEvent, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FiTrash, FiUpload } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
@@ -57,7 +58,7 @@ const NewCarPage = () => {
 
   const handleSubmitCars = (data: FormData) => {
     if (carImages.length === 0) {
-      alert("Adicione alguma imagem");
+      toast.error("Adicione alguma imagem");
       return;
     }
 
@@ -86,11 +87,11 @@ const NewCarPage = () => {
       .then(() => {
         reset();
         setCarImages([]);
-        console.log("Cadastrado com sucesso");
+        toast.success("Veículo adicionado com sucesso!");
       })
       .catch((error) => {
         console.log(error);
-        alert("Error ao cadastrar no banco");
+        toast.error("Error ao cadastrar veículo!");
       });
 
     console.log(data);
@@ -102,7 +103,7 @@ const NewCarPage = () => {
       if (image.type === "image/jpeg" || image.type === "image/png") {
         await handleUploadImage(image);
       } else {
-        alert("Envie uma imagem no formato JPEG/PNG");
+        toast.error("Envie uma imagem no formato JPEG/PNG");
         return;
       }
     }

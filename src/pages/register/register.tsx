@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import z from "zod";
 
@@ -57,10 +58,11 @@ const RegisterPage = () => {
           email: data.email,
           uid: user.user.uid,
         });
-        console.log("Usuario cadastrado com sucesso");
+        toast.success("Usuário cadastrado com sucesso");
         navigate("/dasboard", { replace: true });
       })
       .catch((error) => {
+        toast.error("Error ao cadastrar usuário");
         console.log(error);
       });
   };

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { db } from "../../services/firebaseConection";
-import ContainerComponent from "./components/Container-Component/containerComponent";
 
 interface CarsProps {
   id: string;
@@ -109,14 +108,26 @@ const HomePage = () => {
       <main className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {cars.map((car) => (
           <Link key={car.id} to={`/car/${car.id}`}>
-            <ContainerComponent
-              imgUrl={car.images[0].url}
-              name={car.name}
-              km={car.km}
-              year={car.year}
-              value={car.price}
-              city={car.city}
-            />
+            <div className="bg-white w-full rounded-lg hover:scale-105 transition-all">
+              <img
+                className="w-full max-h-72 rounded-t-lg "
+                src={car.images[0].url}
+              />
+              <p className="font-bold mt-1 mb-2 px-2">{car.name}</p>
+
+              <div className="flex flex-col px-2">
+                <span className="text-zinc-700 mb-4">
+                  Ano: {car.year} | {car.km} km
+                </span>
+                <strong className="text-black font-medium text-xl">
+                  R$: {car.price}
+                </strong>
+              </div>
+              <div className="w-full h-px bg-slate-200 my-2"></div>
+              <div className="px-2 pb-2">
+                <span className="text-zinc-700 mb-4">{car.city}</span>
+              </div>
+            </div>
           </Link>
         ))}
       </main>

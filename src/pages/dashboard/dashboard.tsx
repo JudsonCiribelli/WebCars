@@ -13,7 +13,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { AppContext } from "../../context/AppContext";
 import { db, storage } from "../../services/firebaseConection";
-// import ContainerComponent from "../home/components/Container-Component/containerComponent";
 import PainelHeader from "./components/Painel-Header/painelHeader";
 interface CarsProps {
   id: string;

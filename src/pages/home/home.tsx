@@ -22,6 +22,7 @@ interface CarImage {
 
 const HomePage = () => {
   const [cars, setCars] = useState<CarsProps[]>([]);
+  const [loadImages, setLoadImages] = useState<string[]>([]);
   const [InputValue, setInputValue] = useState("");
 
   useEffect(() => {
@@ -83,6 +84,10 @@ const HomePage = () => {
     setCars(listCars);
   };
 
+  const handleImageLoad = (id: string) => {
+    setLoadImages((prevImageLoads) => [...prevImageLoads, id]);
+  };
+
   return (
     <section className="flex flex-col h-screen items-center my-10 gap-10">
       {/* Input */}
@@ -109,9 +114,19 @@ const HomePage = () => {
         {cars.map((car) => (
           <Link key={car.id} to={`/car/${car.id}`}>
             <div className="bg-white w-full rounded-lg hover:scale-105 transition-all">
+              <div
+                className="w-full h-72 rounded-lg bg-slate-200"
+                style={{
+                  display: loadImages.includes(car.id) ? "none" : "block",
+                }}
+              ></div>
               <img
                 className="w-full max-h-72 rounded-t-lg "
                 src={car.images[0].url}
+                onLoad={() => handleImageLoad(car.id)}
+                style={{
+                  display: loadImages.includes(car.id) ? "block" : "none",
+                }}
               />
               <p className="font-bold mt-1 mb-2 px-2">{car.name}</p>
 

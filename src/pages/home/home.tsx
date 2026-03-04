@@ -63,7 +63,7 @@ const HomePage = () => {
     const q = query(
       collection(db, "cars"),
       where("name", ">=", InputValue.toUpperCase()),
-      where("name", "<=", InputValue.toUpperCase() + "\uf8ff")
+      where("name", "<=", InputValue.toUpperCase() + "\uf8ff"),
     );
 
     const querySnapshot = await getDocs(q);
@@ -91,9 +91,9 @@ const HomePage = () => {
   return (
     <section className="flex flex-col h-screen items-center my-10 gap-10">
       {/* Input */}
-      <div className="bg-white p-4 rounded-xl">
+      <div className="bg-white p-4 rounded-xl mr-4">
         <input
-          className="w-xl border-1 border-gray-500 h-9 rounded-md outline-none px-2 mb-3"
+          className="w-80 border-1 border-gray-500 h-9 rounded-md outline-none  px-2 mb-3 xl:w-xl"
           placeholder="Digite o nome do carro..."
           value={InputValue}
           onChange={(e) => setInputValue(e.target.value)}

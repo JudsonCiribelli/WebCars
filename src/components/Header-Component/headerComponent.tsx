@@ -15,7 +15,7 @@ const HeaderComponent = () => {
   const { signed, loadingAuth } = useContext(AppContext);
 
   return (
-    <header className="flex items-center justify-around h-20 bg-white">
+    <header className="flex w-screen items-center justify-around h-20 bg-white xl:w-full">
       <Link to={"/"}>
         <div className="bg-red-500 rounded-xl p-3 m-10">
           <h1 className="text-2xl font-bold">

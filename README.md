@@ -72,8 +72,13 @@ Otimização do fluxo de imagens para garantir que o catálogo seja leve e perfo
 
 - **[React + Vite](https://vite.dev/guide/)**
 - **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática.
+<<<<<<< HEAD
 - **[Firebase](https://console.firebase.google.com/)** - Login e Database.
 - **[Tailwind](https://tailwindcss.com/)** - Estilização.
+=======
+- **[Firebase](https://console.firebase.google.com/)** Login e Database.
+- **[Tailwind](https://tailwindcss.com/)** Estilização.
+>>>>>>> f0c4e4225dd2f82a75a389950275edaa62434468
 - **[Zod](https://zod.dev/)** - Validação de Schemas.
 
 ---

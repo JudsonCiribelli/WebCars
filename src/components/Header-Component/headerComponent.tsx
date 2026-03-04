@@ -11,21 +11,36 @@ const HeaderComponent = () => {
   const handleSignOutUser = async () => {
     await signOut(auth);
   };
-  const { signed } = useContext(AppContext);
+
+  const { signed, loadingAuth } = useContext(AppContext);
+
   return (
     <header className="flex items-center justify-around h-20 bg-white">
-      <div className="bg-red-500 rounded-xl p-3 m-10">
-        <Link to={"/"}>
+      <Link to={"/"}>
+        <div className="bg-red-500 rounded-xl p-3 m-10">
           <h1 className="text-2xl font-bold">
             Sport<span className="text-2xl font-bold text-white">Carros</span>
           </h1>
+        </div>
+      </Link>
+
+      {!loadingAuth && signed && (
+        <Link to="/dashboard">
+          <div className="border-2 rounded-full p-1 border-gray-900">
+            <FaUser size={25} />
+          </div>
         </Link>
-      </div>
-      <div className="flex border-2 p-2 rounded-full cursor-pointer">
-        <button className="cursor-pointer" onClick={handleSignOutUser}>
-          {signed ? <IoIosLogOut size={25} /> : <FaUser size={25} />}
-        </button>
-      </div>
+      )}
+
+      {loadingAuth && !signed && (
+        <Link to="/login">
+          <button onClick={handleSignOutUser}>
+            <div className="border-2 rounded-full p-1 border-gray-900">
+              <IoIosLogOut size={25} />
+            </div>
+          </button>
+        </Link>
+      )}
     </header>
   );
 };

@@ -6,6 +6,7 @@ import DashboardPage from "./pages/dashboard/dashboard";
 import NewCarPage from "./pages/dashboard/new/newCarPage";
 import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login";
+import NotFoundPage from "./pages/notfound/notfound";
 import RegisterPage from "./pages/register/register";
 import PrivateRoutes from "./routes/privateRoutes";
 
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
             <NewCarPage />
           </PrivateRoutes>
         ),
+      },
+
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },

@@ -1,7 +1,10 @@
 # 🍕 WebCars - Marketplace Automotivo Fullstack
 
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![React Js](https://img.shields.io/badge/React_JS-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=firebase&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Zod](https://img.shields.io/badge/Zod-3068B7?style=for-the-badge&logo=zod&logoColor=white)
 
 > Ecossistema completo para compra e venda de veículos, focado em experiência do usuário, persistência de dados em nuvem e arquitetura escalável de front-end.
@@ -14,7 +17,7 @@ Este projeto simula um cenário real de Marketplace Automotivo. A aplicação pe
 
 O foco principal foi aplicar Clean Code, gerenciamento de estado global otimizado e validações rigorosas para garantir a integridade dos dados e uma jornada de compra fluida.
 
-## 🚀 Diferenciais de Engenharia (Production Ready)
+## 🚀 Diferenciais do Projeto
 
 Para elevar o nível de escalabilidade e confiabilidade, foram implementados os seguintes padrões
 

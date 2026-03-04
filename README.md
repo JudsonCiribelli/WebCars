@@ -1,54 +1,68 @@
-# React + TypeScript + Vite
+🚗 WebCars - Marketplace Automotivo Fullstack
+Status do Projeto: Concluído 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é uma plataforma robusta de compra e venda de veículos desenvolvida para simular a experiência completa de um ecossistema de marketplace. A aplicação une uma interface de alta performance com a complexidade de gestão de dados em tempo real, garantindo segurança e fluidez tanto para compradores quanto para vendedores.
 
-Currently, two official plugins are available:
+🌊 Fluxo da Aplicação (User Journey)
+O sistema foi arquitetado para guiar o usuário através de três pilares principais:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Exploração e Descoberta (Público):
 
-## Expanding the ESLint configuration
+Acesso ao catálogo dinâmico de veículos com carregamento otimizado.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Visualização detalhada de especificações técnicas e galeria de fotos.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Canal direto de contato com o anunciante via integração externa.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Identidade e Acesso (Autenticação):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Fluxo de login seguro utilizando Firebase Authentication.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Opções híbridas: Social Login (Google) ou autenticação tradicional (E-mail/Senha).
+
+Proteção de rotas: Acesso ao painel de anúncios restrito a usuários autenticados.
+
+Gestão de Inventário (Privado - Dashboard):
+
+Create: Cadastro de veículos com formulários inteligentes e validação rigorosa.
+
+Storage: Upload e processamento de múltiplas imagens via Firebase Storage.
+
+Control: Painel administrativo para edição ou remoção de anúncios (CRUD) com verificação de propriedade do dado.
+
+🛡️ Diferenciais Técnicos e Engenharia
+Integridade com Zod: Implementação de schemas para validação de formulários em tempo real, prevenindo a entrada de dados inconsistentes no banco.
+
+Segurança no Firebase: Regras de segurança granulares para garantir que apenas o proprietário de um anúncio possa editá-lo ou deletá-lo.
+
+Estado Global com Context API: Gerenciamento eficiente de sessões de usuário e sincronização de dados de anúncios entre componentes sem "prop drilling".
+
+Arquitetura Clean Code: Organização de pastas baseada em responsabilidades (Components, Pages, Services, Hooks, Contexts), facilitando a manutenção e escalabilidade.
+
+TypeScript Estrito: Tipagem completa de ponta a ponta, reduzindo bugs em tempo de execução e melhorando o IntelliSense durante o desenvolvimento.
+
+🎨 Interface e UX
+Tailwind CSS: Design moderno e responsivo focado no conceito Mobile-First.
+
+Feedback Visual: Estados de carregamento (Skeleton screens), notificações de sucesso/erro e tratamentos de formulário amigáveis.
+
+⚙️ Como Executar o Projeto
+Clone o repositório:
+
+Bash
+git clone https://github.com/seu-usuario/webcars.git
+Instale as dependências:
+
+Bash
+npm install
+Configure as variáveis de ambiente:
+Crie um arquivo .env na raiz com suas credenciais do Firebase:
+
+Snippet de código
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
+Inicie a aplicação:
+
+Bash
+npm run dev

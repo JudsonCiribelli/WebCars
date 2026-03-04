@@ -73,6 +73,7 @@ Otimização do fluxo de imagens para garantir que o catálogo seja leve e perfo
 - **[React + Vite](https://vite.dev/guide/)**
 - **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática.
 - **[Firebase](https://console.firebase.google.com/)** Login e Database.
+- **[Tailwind](https://tailwindcss.com/)** Estilização.
 - **[Zod](https://zod.dev/)** - Validação de Schemas.
 
 ---
@@ -88,7 +89,7 @@ Otimização do fluxo de imagens para garantir que o catálogo seja leve e perfo
 
 1. **Clone o repositório:**
    ```bash
-   git clone (https://github.com/SeuUsuario/WebCars)
+   git clone (https://github.com/JudsonCiribelli/WebCars.git)
    ```
 2. **Instale as dependências:**
    ```bash

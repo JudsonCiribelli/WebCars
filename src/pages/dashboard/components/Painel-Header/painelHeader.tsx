@@ -9,8 +9,8 @@ const PainelHeader = () => {
   };
   return (
     <div className="bg-red-500 p-4 rounded-xl flex items-center w-full text-white font-medium gap-4 mb-4">
-      <Link to="/dasboard">Dasboard</Link>
-      <Link to="/dasboard/new">Novo carro</Link>
+      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/dashboard/new">Novo carro</Link>
 
       <button className="ml-auto cursor-pointer" onClick={handleLogoutUser}>
         Sair da conta

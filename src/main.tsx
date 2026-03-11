@@ -20,5 +20,5 @@ createRoot(document.getElementById("root")!).render(
       <Toaster position="top-right" reverseOrder={false} />
       <RouterProvider router={router} />
     </AppContextProvider>
-  </StrictMode>
+  </StrictMode>,
 );

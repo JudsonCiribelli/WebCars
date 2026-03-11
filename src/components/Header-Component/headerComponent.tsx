@@ -23,6 +23,9 @@ const HeaderComponent = () => {
           </h1>
         </div>
       </Link>
+      {loadingAuth && (
+        <div className="w-8 h-8 border-2 border-gray-200 border-t-red-500 rounded-full animate-spin"></div>
+      )}
 
       {!loadingAuth && signed && (
         <Link to="/dashboard">
@@ -32,7 +35,7 @@ const HeaderComponent = () => {
         </Link>
       )}
 
-      {loadingAuth && !signed && (
+      {!loadingAuth && !signed && (
         <Link to="/login">
           <button onClick={handleSignOutUser}>
             <div className="border-2 rounded-full p-1 border-gray-900">
